@@ -1,39 +1,18 @@
 <?php include("include/adminHeader.php"); ?>
 <?php include("config.php"); ?>
-<?php
+<?php 
 date_default_timezone_set('Asia/Kolkata');
 
-// Handle deletion
-if (isset($_GET['id']) && is_numeric($_GET['id'])) {
-    $delete_id = (int) $_GET['id'];
-    $delete_sql = "DELETE FROM category WHERE id = $delete_id";
-    if (mysqli_query($conn, $delete_sql)) {
-        $_SESSION['toast'] = [
-            'type' => 'success',
-            'message' => '✅ Category deleted successfully!'
-        ];
-        header("Location: category.php");
-        exit;
-    } else {
-        $_SESSION['toast'] = [
-            'type' => 'error',
-            'message' => '❌ Error deleting category.'
-        ];
-        header("Location: category.php");
-        exit;
-    }
-}
-
-// Fetch all categories
-$users = [];
-$result = mysqli_query($conn, "SELECT id, category_name, status, created FROM category ORDER BY created ASC");
+$roles = [];
+$result = mysqli_query($conn, "SELECT id, role_name, status, created FROM role ORDER BY created ASC");
 while ($row = mysqli_fetch_assoc($result)) {
-    $users[] = $row;
+    $role[] = $row;
 }
 ?>
 
+
  <style>
-    #categoryTable thead th {
+    #roleTable thead th {
         background-color: #343a40 !important;
         color: white !important;
     }
@@ -61,41 +40,39 @@ while ($row = mysqli_fetch_assoc($result)) {
                     <div class="row align-items-center">
                         <div class="col-md-12">
                             <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h5 class="m-b-10">CATEGORY</h5>
-                                <a href="add_category.php" class="btn btn-primary">Add Category</a>
+                                <h5 class="m-b-10">ROLE</h5>
+                                <a href="add_role.php" class="btn btn-primary">Add Role</a>
                             </div>
 
                             <div class="card">
                                 <div class="card-body table-border-style">
                                     <div class="table-responsive">
-                                        <table class="table table-bordered table-striped" id="categoryTable">
+                                        <table class="table table-bordered table-striped" id="roleTable">
                                             <thead>
                                                 <tr>
                                                     <th>S.No</th>
-                                                    <th>Category</th>
+                                                    <th>ROLE NAME</th>
                                                     <th>Status</th>
                                                     <th>Created</th>
                                                     <th>Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php if (!empty($users)): ?>
-                                                    <?php foreach ($users as $index => $user): ?>
+                                                <?php if (!empty($role)): ?>
+                                                    <?php foreach ($role as $index => $roles): ?>
                                                         <tr>
                                                             <td><?= $index + 1; ?></td>
-                                                            <td><?= htmlspecialchars($user['category_name']); ?></td>
-                                                            <td><?= ($user['status'] == '1') ? "Active" : "Inactive"; ?></td>
-                                                            <td><?= $user['created']; ?></td>
-                                                            <td>
-                                                                <a href="edit_category.php?action=edit&id=<?= $user['id']; ?>" class="btn btn-sm btn-warning">Edit</a>
-                                                                <a href="category.php?id=<?= $user['id']; ?>" class="btn btn-sm btn-danger"
-                                                                onclick="return confirm('Are you sure you want to delete this category?')">Delete</a>
-                                                            </td>
+                                                            <td><?= htmlspecialchars($roles['role_name']); ?></td>
+                                                            <td><?= ($roles['status'] == '1') ? "Active" : "Inactive"; ?></td>
+                                                            <td><?= $roles['created']; ?></td>
+                                                            <td class="text-center">
+                                                                <a href="edit_role.php?action=edit&id=<?= $roles['id']; ?>" class="btn btn-sm btn-warning">Edit</a>
+                                                                </td>
                                                         </tr>
                                                     <?php endforeach; ?>
                                                 <?php else: ?>
                                                     <tr>
-                                                        <td colspan="5" class="text-center">No categories found.</td>
+                                                        <td colspan="5" class="text-center">No role found.</td>
                                                     </tr>
                                                 <?php endif; ?>
                                             </tbody>
@@ -116,7 +93,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 
     <script>
         $(document).ready(function() {
-            $('#categoryTable').DataTable({
+            $('#roleTable').DataTable({
                 paging: true,
                 pageLength: 10,
                 lengthChange: false,

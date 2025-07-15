@@ -24,18 +24,22 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     }
 }
 
-// Fetch users
+// Fetch userss
 $users = [];
 $result = mysqli_query($conn, "SELECT id, first_name, last_name, email_address, status, created FROM users ORDER BY created ASC");
 while ($row = mysqli_fetch_assoc($result)) {
     $users[] = $row;
 }
 ?>
-
+<style>
+    #usersTable thead th {
+        background-color: #343a40 !important;
+        color: white !important;
+    }
+</style>
 <body>
 <?php include("include/navBar.php"); ?>
 
-    <!-- ✅ Toast Message -->
     <!-- ✅ Toast Message -->
     <?php if (isset($_SESSION['toast'])): ?>
         <?php $toast = $_SESSION['toast']; unset($_SESSION['toast']); ?>
@@ -108,14 +112,6 @@ while ($row = mysqli_fetch_assoc($result)) {
 </div>
 
 <?php include("include/adminFooter.php"); ?>
-</body>
-
-<style>
-    #usersTable thead th {
-        background-color: #343a40 !important;
-        color: white !important;
-    }
-</style>
 
 <script>
     $(document).ready(function() {
@@ -128,11 +124,6 @@ while ($row = mysqli_fetch_assoc($result)) {
             searching: true,
         });
     });
-</script>
-
-<!-- ✅ Toast Auto Hide -->
-<!-- ✅ Toast Auto Hide -->
-<script>
     document.addEventListener("DOMContentLoaded", function () {
         const toast = document.getElementById("custom-toast");
         if (toast) {
@@ -142,4 +133,9 @@ while ($row = mysqli_fetch_assoc($result)) {
             }, 3000);
         }
     });
+    if (localStorage.getItem('darkMode') === 'enabled') {
+        document.body.classList.add('dark-mode');
+    }
+
 </script>
+</body>

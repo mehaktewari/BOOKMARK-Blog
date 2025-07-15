@@ -31,6 +31,12 @@
 					    <a href="article.php" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Article</span></a>
 					</li>
 					<li class="nav-item">
+					    <a href="role.php" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Role</span></a>
+					</li>
+					<li class="nav-item">
+					    <a href="permission.php" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Permission</span></a>
+					</li>
+					<li class="nav-item">
 					    <a href="contacts.php" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Contacts</span></a>
 					</li>
 					<li class="nav-item">

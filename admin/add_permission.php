@@ -5,15 +5,15 @@
 $errors = [];
 $success = '';
 
-$category_name = '';
+$page_name = '';
 $status = '';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $category_name = trim(mysqli_real_escape_string($conn, $_POST['category_name']));
+    $page_name = trim(mysqli_real_escape_string($conn, $_POST['page_name']));
     $status = mysqli_real_escape_string($conn, $_POST['status']);
 
-    if (empty($category_name)) {
-        $errors[] = "Category is required.";
+    if (empty($page_name)) {
+        $errors[] = "Page name is required.";
     }
 
     if (!isset($_POST['status']) || $_POST['status'] === '') {
@@ -21,15 +21,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if (empty($errors)) {
-        $sql = "INSERT INTO category (category_name, status, created)
-                VALUES ('$category_name','$status', NOW())";
+        $sql = "INSERT INTO permissions (page_name, status, created)
+                VALUES ('$page_name','$status', NOW())";
 
         if (mysqli_query($conn, $sql)) {
             $_SESSION['toast'] = [
                 'type' => 'success',
-                'message' => '✅ Category added successfully!'
+                'message' => '✅ Permission added successfully!'
             ];
-            header("Location: category.php");
+            header("Location: permission.php");
             exit;
         } else {
             $errors[] = "Database error: " . mysqli_error($conn);
@@ -66,12 +66,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="row align-items-center">
                         <div class="col-md-12">
                             <div class="page-header-title">
-                                <h5 class="m-b-10">Add New Category</h5>
+                                <h5 class="m-b-10">Add New Permission</h5>
                             </div>
 
                             <div class="card mt-3">
                                 <div class="card-header">
-                                    <h5>Category Details</h5>
+                                    <h5>Permission Details</h5>
                                 </div>
                                 <div class="card-body">
                                     <?php if (!empty($errors)): ?>
@@ -88,13 +88,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         <div class="row">
                                             <div class="col-sm-6">
                                                 <div class="form-group">
-                                                    <label for="Category">CATEGORY</label>
-                                                    <input type="text" class="form-control" name="category_name" id="Category" value="<?= htmlspecialchars($category_name) ?>">
+                                                    <label for="Page">Page Name</label>
+                                                    <input type="text" class="form-control" name="page_name" id="Page" value="<?= htmlspecialchars($page_name) ?>">
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
                                                 <div class="form-group">
-                                                    <label for="status">STATUS</label>
+                                                    <label for="status">Status</label>
                                                     <select name="status" class="form-control" id="status">
                                                         <option value="">-- Select Status --</option>
                                                         <option value="1" <?= ($status === '1') ? 'selected' : '' ?>>Active</option>
@@ -106,7 +106,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         <div class="row mt-1">
                                             <div class="col-md-12">
                                                 <button type="submit" class="btn btn-primary mr-2">Submit</button>
-                                                <a href="category.php" class="btn btn-secondary">Back</a>
+                                                <a href="permission.php" class="btn btn-secondary">Back</a>
                                             </div>
                                         </div>
                                     </form>

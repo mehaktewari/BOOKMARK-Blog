@@ -29,7 +29,12 @@ while ($row = mysqli_fetch_assoc($result)) {
     $users[] = $row;
 }
 ?>
-
+<style>
+    #articleTable thead th {
+        background-color: #343a40 !important;
+        color: white !important;
+    }
+</style>
 <body class="">
     <?php if (isset($_SESSION['toast'])): ?>
         <?php $toast = $_SESSION['toast']; unset($_SESSION['toast']); ?>
@@ -127,14 +132,8 @@ while ($row = mysqli_fetch_assoc($result)) {
         </div>
     </div>
     <?php include("include/adminFooter.php"); ?>
-</body>
+    
 
-<style>
-    #articleTable thead th {
-        background-color: #343a40 !important;
-        color: white !important;
-    }
-</style>
 
 <script>
     $(document).ready(function() {
@@ -158,4 +157,10 @@ while ($row = mysqli_fetch_assoc($result)) {
             }, 3000); // 3 seconds
         }
     });
+
+    if (localStorage.getItem('darkMode') === 'enabled') {
+        document.body.classList.add('dark-mode');
+    }
 </script>
+
+</body>

@@ -5,7 +5,15 @@
 <script src="assets/js/pages/dashboard-main.js"></script>
 <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> -->
 <script src="assets/js/link/dataTables.js"></script>
-<script src="assets/js/link/summernote.js"></script>
+<!-- jQuery -->
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> -->
+
+<!-- Bootstrap Bundle JS (includes Popper) -->
+ <script src="assets/js/link/bootstrap.bundle.min.js"></script> 
+
+<!-- Summernote JS -->
+<script src="assets/js/link/summernote-bs4.min.js"></script>
+
 
 </body>
 

@@ -18,7 +18,13 @@
 	<link rel="stylesheet" href="assets/css/links/dataTables.bootstrap4.css">
 
 	<link rel="stylesheet" href="assets/css/links/dataTables.jqueryui.css">
-	<link href="assets/css/links/summernote.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="assets/css/styless.css">
+	<!-- Bootstrap CSS (required by Summernote) -->
+	<!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"> -->
+
+	<!-- Summernote CSS -->
+	<link href="assets/css/links/summernote-bs4.min.css" rel="stylesheet">
+
 
 
 </head>
@@ -64,7 +70,7 @@
 
 						</div>
 						<ul class="pro-body">
-							<li><a href="user-profile.html" class="dropdown-item"><i class="feather icon-user"></i>
+							<li><a href="profile.php" class="dropdown-item"><i class="feather icon-user"></i>
 									Profile</a></li>
 						
 						</ul>

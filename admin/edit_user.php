@@ -143,5 +143,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }, 3000);
         }
     });
+    if (localStorage.getItem('darkMode') === 'enabled') {
+        document.body.classList.add('dark-mode');
+    }
 </script>
 </body>

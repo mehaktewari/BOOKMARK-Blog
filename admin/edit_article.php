@@ -176,18 +176,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!-- Summernote -->
 <script>
-$(document).ready(function() {
-  $('.summernote').summernote({
-    height: 250,
-    codemirror: {
-        theme: 'monokai'
-    }
-  });
-});
-</script>
+    $(document).ready(function() {
+    $('.summernote').summernote({
+        height: 250,
+        codemirror: {
+            theme: 'monokai'
+        }
+    });
+    });
 
-<!-- Toast Auto Hide -->
-<script>
     document.addEventListener("DOMContentLoaded", function () {
         const toast = document.getElementById("custom-toast");
         if (toast) {
@@ -197,4 +194,9 @@ $(document).ready(function() {
             }, 3000);
         }
     });
+    if (localStorage.getItem('darkMode') === 'enabled') {
+        document.body.classList.add('dark-mode');
+    }
 </script>
+
+</body>

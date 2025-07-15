@@ -1,39 +1,37 @@
 <?php include("include/adminHeader.php"); ?>
 <?php include("config.php"); ?>
-<?php
+<?php 
 date_default_timezone_set('Asia/Kolkata');
-
 // Handle deletion
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $delete_id = (int) $_GET['id'];
-    $delete_sql = "DELETE FROM category WHERE id = $delete_id";
+    $delete_sql = "DELETE FROM permissions WHERE id = $delete_id";
     if (mysqli_query($conn, $delete_sql)) {
         $_SESSION['toast'] = [
             'type' => 'success',
-            'message' => '✅ Category deleted successfully!'
+            'message' => '✅ Permission deleted successfully!'
         ];
-        header("Location: category.php");
+        header("Location: permission.php");
         exit;
     } else {
         $_SESSION['toast'] = [
             'type' => 'error',
-            'message' => '❌ Error deleting category.'
+            'message' => '❌ Error deleting permission.'
         ];
-        header("Location: category.php");
+        header("Location: permission.php");
         exit;
     }
 }
-
-// Fetch all categories
-$users = [];
-$result = mysqli_query($conn, "SELECT id, category_name, status, created FROM category ORDER BY created ASC");
+$permissions = [];
+$result = mysqli_query($conn, "SELECT id, page_name, status, created FROM permissions ORDER BY created ASC");
 while ($row = mysqli_fetch_assoc($result)) {
-    $users[] = $row;
+    $permission[] = $row;
 }
 ?>
 
+
  <style>
-    #categoryTable thead th {
+    #permissionTable thead th {
         background-color: #343a40 !important;
         color: white !important;
     }
@@ -61,41 +59,42 @@ while ($row = mysqli_fetch_assoc($result)) {
                     <div class="row align-items-center">
                         <div class="col-md-12">
                             <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h5 class="m-b-10">CATEGORY</h5>
-                                <a href="add_category.php" class="btn btn-primary">Add Category</a>
+                                <h5 class="m-b-10">PERMISSION</h5>
+                                <a href="add_permission.php" class="btn btn-primary">Add Permission</a>
                             </div>
 
                             <div class="card">
                                 <div class="card-body table-border-style">
                                     <div class="table-responsive">
-                                        <table class="table table-bordered table-striped" id="categoryTable">
+                                        <table class="table table-bordered table-striped" id="permissionTable">
                                             <thead>
                                                 <tr>
                                                     <th>S.No</th>
-                                                    <th>Category</th>
+                                                    <th>Page NAME</th>
                                                     <th>Status</th>
                                                     <th>Created</th>
                                                     <th>Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php if (!empty($users)): ?>
-                                                    <?php foreach ($users as $index => $user): ?>
+                                                <?php if (!empty($permission)): ?>
+                                                    <?php foreach ($permission as $index => $permissions): ?>
                                                         <tr>
                                                             <td><?= $index + 1; ?></td>
-                                                            <td><?= htmlspecialchars($user['category_name']); ?></td>
-                                                            <td><?= ($user['status'] == '1') ? "Active" : "Inactive"; ?></td>
-                                                            <td><?= $user['created']; ?></td>
+                                                            <td><?= htmlspecialchars($permissions['page_name']); ?></td>
+                                                            <td><?= ($permissions['status'] == '1') ? "Active" : "Inactive"; ?></td>
+                                                            <td><?= $permissions['created']; ?></td>
                                                             <td>
-                                                                <a href="edit_category.php?action=edit&id=<?= $user['id']; ?>" class="btn btn-sm btn-warning">Edit</a>
-                                                                <a href="category.php?id=<?= $user['id']; ?>" class="btn btn-sm btn-danger"
-                                                                onclick="return confirm('Are you sure you want to delete this category?')">Delete</a>
+                                                                <a href="edit_permission.php?action=edit&id=<?= $permissions['id']; ?>" class="btn btn-sm btn-warning">Edit</a>
+                                                                <a href="permission.php?id=<?= $permissions['id']; ?>" class="btn btn-sm btn-danger"
+                                                                onclick="return confirm('Are you sure you want to delete this permission?')">Delete</a>
                                                             </td>
+
                                                         </tr>
                                                     <?php endforeach; ?>
                                                 <?php else: ?>
                                                     <tr>
-                                                        <td colspan="5" class="text-center">No categories found.</td>
+                                                        <td colspan="5" class="text-center">No Permission found.</td>
                                                     </tr>
                                                 <?php endif; ?>
                                             </tbody>
@@ -116,7 +115,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 
     <script>
         $(document).ready(function() {
-            $('#categoryTable').DataTable({
+            $('#permissionTable').DataTable({
                 paging: true,
                 pageLength: 10,
                 lengthChange: false,

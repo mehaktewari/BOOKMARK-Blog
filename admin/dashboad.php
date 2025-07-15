@@ -105,7 +105,7 @@ $latestUsersQuery = mysqli_query($conn, "SELECT first_name, last_name, email_add
                                     </div>
                                     <div class="col-sm-8 text-md-center">
                                         <h5><?php echo $contactCount; ?></h5>
-                                        <span><a href="contact.php">Contacts</a></span>
+                                        <span><a href="contacts.php">Contacts</a></span>
                                     </div>
                                 </div>
                             </div>
@@ -200,16 +200,20 @@ $latestUsersQuery = mysqli_query($conn, "SELECT first_name, last_name, email_add
             </div>
         </div>
     </div>
-</body>
-<?php include("include/adminFooter.php"); ?>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const toast = document.getElementById("custom-toast");
-        if (toast) {
-            setTimeout(() => {
-                toast.style.opacity = "0";
-                setTimeout(() => toast.remove(), 500);
-            }, 3000);
+    <?php include("include/adminFooter.php"); ?>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const toast = document.getElementById("custom-toast");
+            if (toast) {
+                setTimeout(() => {
+                    toast.style.opacity = "0";
+                    setTimeout(() => toast.remove(), 500);
+                }, 3000);
+            }
+        });
+        if (localStorage.getItem('darkMode') === 'enabled') {
+        document.body.classList.add('dark-mode');
         }
-    });
-</script>
+    </script>
+</body>
+

@@ -8,7 +8,8 @@ if (isset($_GET['id'])) {
     $result = mysqli_query($conn, $sql);
 
     if (mysqli_num_rows($result) > 0) {
-        $blogData = mysqli_fetch_assoc($result); // renamed to avoid conflict later
+        $blogData = mysqli_fetch_assoc($result); 
+        $articleID = $blogData['id'];
     } else {
         echo "Article not found.";
         exit;
@@ -26,8 +27,8 @@ if (isset($_POST['submit_comment'])) {
     $created = date("Y-m-d H:i:s");
 
     if (!empty($name) && !empty($comment) && $rating > 0 && $rating <= 5) {
-        $insertSQL = "INSERT INTO comments (name, comments, rating, status, created) 
-                      VALUES ('$name', '$comment', $rating, '$status', '$created')";
+        $insertSQL = "INSERT INTO comments (name, article_id, comments, rating, status, created) 
+                      VALUES ('$name','$articleID', '$comment', $rating, '$status', '$created')";
 
         if (mysqli_query($conn, $insertSQL)) {
             header("Location: blog_details.php?id=$id&comment=success");
@@ -127,7 +128,7 @@ if (isset($_POST['submit_comment'])) {
                 <div class="mt-5">
                     <h4 class="fw-bold mb-4">Comments</h4>
                     <?php 
-                        $sql = "SELECT * FROM comments WHERE status = '1' ORDER BY created DESC";
+                        $sql = "SELECT * FROM comments WHERE status = '1' AND article_id = $articleID ORDER BY created DESC";
                         $result = mysqli_query($conn, $sql);
                         if (mysqli_num_rows($result) > 0) {
                             while ($row = mysqli_fetch_assoc($result)) {
@@ -151,7 +152,6 @@ if (isset($_POST['submit_comment'])) {
                 </div>
             </div>
 
-            <!-- Sidebar: Related Blogs -->
             <div class="col-lg-4">
                 <h4 class="fw-bold mb-3">Related Blogs</h4>
                 <?php 
@@ -196,7 +196,7 @@ if (isset($_POST['submit_comment'])) {
     </div>					
 </section>
 
-<!-- Rating Tooltip Script -->
+
 <script>
     function showRatingTooltip(star) {
         const tooltip = document.getElementById("rating-tooltip");

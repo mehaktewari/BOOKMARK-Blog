@@ -165,31 +165,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </div>
 </div>
-</body>
-
-<?php include("include/adminFooter.php"); ?>
 
 <!-- Summernote init -->
 <script>
-$(document).ready(function() {
-  $('.summernote').summernote({
-    height: 250,
-    codemirror: {
-      theme: 'monokai'
-    }
-  });
-});
-</script>
+    $(document).ready(function() {
+    $('.summernote').summernote({
+        height: 250,
+        codemirror: {
+        theme: 'monokai'
+        }
+    });
+    });
 
-<!-- Auto-hide toast -->
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    const toast = document.getElementById("custom-toast");
-    if (toast) {
-        setTimeout(() => {
-            toast.style.opacity = "0";
-            setTimeout(() => toast.remove(), 500);
-        }, 3000);
+    document.addEventListener("DOMContentLoaded", function () {
+        const toast = document.getElementById("custom-toast");
+        if (toast) {
+            setTimeout(() => {
+                toast.style.opacity = "0";
+                setTimeout(() => toast.remove(), 500);
+            }, 3000);
+        }
+    });
+
+    if (localStorage.getItem('darkMode') === 'enabled') {
+        document.body.classList.add('dark-mode');
     }
-});
 </script>
+<?php include("include/adminFooter.php"); ?>
+</body>
+
