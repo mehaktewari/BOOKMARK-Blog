@@ -77,12 +77,15 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
 	<!-- Blogs Area -->
 	<section class="blogs-area section-gap py-5" id="blogs" style="font-size: 1.15rem;">
 		<div class="container">
+			<!-- Section Heading -->
 			<div class="row justify-content-center mb-4">
 				<div class="col-lg-8 text-center">
 					<h1 class="mb-3 fw-bold text-black display-5">BLOGS</h1>
 					<p class="text-muted fs-5">Explore our latest book reviews, reading tips, and literary stories curated for book lovers like you.</p>
 				</div>
 			</div>
+
+			<!-- Blog Cards -->
 			<div class="row g-4">
 				<?php
 				$query = "SELECT * FROM article WHERE status = 1 ORDER BY id DESC LIMIT 4";
@@ -94,26 +97,37 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
 						: "admin/assets/img/default.jpg"; 
 				?>
 				<div class="col-lg-6">
-					<div class="single-about media shadow p-4 rounded d-flex align-items-start">
-						<img class="img-fluid rounded me-3" src="<?php echo $imagePath; ?>" alt="Blog Image" width="120" height="120" style="object-fit: cover;">
-						<div class="media-body ps-3">
-							<h4 class="mt-0 fs-4">
-								<a href="blog_details.php?id=<?php echo $row['id']; ?>" class="text-primary fw-bold">
+					<div class="d-flex flex-row shadow rounded p-4 align-items-start" style="gap: 2rem;">
+						<!-- Blog Image -->
+						<img src="<?php echo $imagePath; ?>" 
+							alt="Blog Image" 
+							class="img-fluid rounded"
+							width="120" height="120" 
+							style="object-fit: cover; flex-shrink: 0;">
+
+						<!-- Blog Content -->
+						<div class="flex-grow-1">
+							<h4 class="fs-4 mb-3">
+								<a href="blog_details.php?id=<?php echo $row['id']; ?>" class="text-primary fw-bold text-decoration-none">
 									<?php echo htmlspecialchars($row['title']); ?>
 								</a>
 							</h4>
-							<p class="mb-0 fs-6"><?php echo htmlspecialchars($row['short_description']); ?></p>
+							<p class="fs-6 text-muted mb-0">
+								<?php echo htmlspecialchars($row['short_description']); ?>
+							</p>
 						</div>
 					</div>
 				</div>
 				<?php } ?>
 			</div>
 
+			<!-- View More Button -->
 			<div class="text-center mt-5">
 				<a href="blogs.php" class="btn btn-outline-primary px-4 fs-5">View More</a>
 			</div>
 		</div>
 	</section>
+
 	<!-- End Blogs Area -->
 
 	<!-- Contact Area -->

@@ -2,9 +2,6 @@
 <h1 align="center">📝 Blogging Page</h1>
 <p align="center">A responsive and dynamic blog management system built with <b>PHP, MySQL, HTML, CSS, JS</b> – hosted on <b>XAMPP</b></p>
 
-<p align="center">
-  <img src="public/screenshots/home.png" width="100%" alt="Blog Home" />
-</p>
 
 ---
 
@@ -30,15 +27,26 @@ This project is a simple yet powerful **blogging platform** designed using **cor
 
 ## 🖼️ Screenshots
 
-> Add your actual screenshots to `public/screenshots/` and rename them if needed.
+> Below are previews of different pages from the blogging platform. All screenshots are stored in `public/screenshots/`.
 
-| Page | Preview |
-|------|---------|
-| **Home Page** | ![](public/screenshots/home.png) |
+| Page              | Preview |
+|-------------------|---------|
+| **Home Page**     | ![](public/screenshots/home.png) |
+| **All Blogs**     | ![](public/screenshots/allblog.png) |
+| **Single Blog**   | ![](public/screenshots/blog.png) |
+| **Add Article**   | ![](public/screenshots/article.png) |
+| **About Page**    | ![](public/screenshots/about.png) |
+| **Login Page**    | ![](public/screenshots/login.png) |
+| **Contact Page**  | ![](public/screenshots/contact.png) |
+| **Contact Table** | ![](public/screenshots/contacts.png) |
+| **Comment Table** | ![](public/screenshots/comment.png) |
 | **Admin Dashboard** | ![](public/screenshots/dashboard.png) |
-| **Add Blog** | ![](public/screenshots/add_blog.png) |
-| **Contact Form** | ![](public/screenshots/contact.png) |
-| **Login Page** | ![](public/screenshots/login.png) |
+| **Category Page** | ![](public/screenshots/category.png) |
+| **User Roles**    | ![](public/screenshots/role.png) |
+| **Permissions**   | ![](public/screenshots/permission.png) |
+| **Users Page**    | ![](public/screenshots/users.png) |
+| **Profile Page**  | ![](public/screenshots/profile.png) |
+| **Settings Page** | ![](public/screenshots/setting.png) |
 
 ---
 
