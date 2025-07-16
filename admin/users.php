@@ -1,5 +1,7 @@
 <?php include("include/adminHeader.php"); ?>
 <?php include("config.php"); ?>
+<?php include("check_permission.php"); ?>
+
 <?php
 date_default_timezone_set('Asia/Kolkata');
 
@@ -26,7 +28,15 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 
 // Fetch userss
 $users = [];
-$result = mysqli_query($conn, "SELECT id, first_name, last_name, email_address, status, created FROM users ORDER BY created ASC");
+$result = mysqli_query($conn, "
+    SELECT 
+        users.id, users.first_name, users.last_name, users.email_address, 
+        users.status, users.created, role.role_name 
+    FROM users 
+    LEFT JOIN role ON users.role_id = role.id 
+    ORDER BY users.created ASC
+");
+
 while ($row = mysqli_fetch_assoc($result)) {
     $users[] = $row;
 }
@@ -71,6 +81,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                                             <tr>
                                                 <th>S.NO</th>
                                                 <th>Name</th>
+                                                <th>Role</th>
                                                 <th>Email</th>
                                                 <th>Status</th>
                                                 <th>Created</th>
@@ -83,6 +94,7 @@ while ($row = mysqli_fetch_assoc($result)) {
                                                     <tr>
                                                         <td><?= $index + 1; ?></td>
                                                         <td><?= htmlspecialchars($user['first_name'] . ' ' . $user['last_name']); ?></td>
+                                                        <td><?= htmlspecialchars($user['role_name'] ?? 'N/A'); ?></td>
                                                         <td><?= htmlspecialchars($user['email_address']); ?></td>
                                                         <td><?= ($user['status'] == '1') ? "Active" : "Inactive"; ?></td>
                                                         <td><?= $user['created']; ?></td>

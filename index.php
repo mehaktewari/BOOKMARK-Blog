@@ -6,30 +6,28 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
 
 <body>
 
-	<!-- ✅ Toast Message -->
-	<?php if ($status === 'success' || $status === 'error'): ?>
+	<!-- Toast Message -->
+	<?php if (isset($_GET['status']) && ($_GET['status'] === 'success' || $_GET['status'] === 'error')): ?>
 		<div id="custom-toast" style="
 			position: fixed;
 			top: 20px;
 			right: 20px;
-			background-color: <?= $status === 'success' ? '#d4edda' : '#f8d7da' ?>;
-			color: <?= $status === 'success' ? '#155724' : '#721c24' ?>;
+			background-color: <?= $_GET['status'] === 'success' ? '#d4edda' : '#f8d7da' ?>;
+			color: <?= $_GET['status'] === 'success' ? '#155724' : '#721c24' ?>;
 			padding: 12px 24px;
-			border: 1px solid <?= $status === 'success' ? '#c3e6cb' : '#f5c6cb' ?>;
+			border: 1px solid <?= $_GET['status'] === 'success' ? '#c3e6cb' : '#f5c6cb' ?>;
 			border-radius: 8px;
 			box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 			font-weight: 500;
 			z-index: 9999;
 			transition: opacity 0.5s ease-in-out;
 		">
-			<?= $status === 'success' 
-				? '✅ Message sent successfully!' 
-				: '❌ Error sending message. Please try again with new email.' ?>
+			<?= $_GET['status'] === 'success' ? '✅ Message sent successfully!' : '❌ Error sending message. Please try again with new email.' ?>
 		</div>
 	<?php endif; ?>
 
 
-	<!-- 🟦 Banner Area -->
+	<!-- Banner Area -->
 	<section class="banner-area relative" id="home" data-parallax="scroll" data-image-src="assets/logo/picture1.jpg">
 		<div class="overlay-bg overlay"></div>
 		<div class="container">
@@ -43,8 +41,9 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
 			</div>
 		</div>
 	</section>
+	<!-- End Banner Area -->
 
-	<!-- 🟦 About Area -->
+	<!-- About Area -->
 	<section class="contact-area section-gap py-5" id="about" style="background-color:rgb(237, 237, 237);">
 		<div class="container">
 			<div class="row justify-content-center mb-4">
@@ -56,16 +55,16 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
 			<div class="card shadow rounded-3 border-0 p-5 mx-auto" style="max-width: 1100px; background-color: rgb(243, 243, 243); font-size: 1.15rem;">
 				<div class="card-body">
 					<p><strong>At <span class="text-primary">BookMark</span></strong>, we believe that every book holds a story beyond its pages — and we're here to share those stories with the world. Whether you're a casual reader or a passionate bibliophile, this space is for you.</p>
-					<p>Founded by book lovers, for book lovers, our blog brings you honest reviews, thoughtful recommendations, author spotlights, literary news, and engaging discussions...</p>
+					<p>Founded by book lovers, for book lovers, our blog brings you honest reviews, thoughtful recommendations, author spotlights, literary news, and engaging discussions. From timeless classics to modern masterpieces, we explore a wide range of genres including fiction, non-fiction, fantasy, romance, mystery, historical reads, and more.</p>
 
 					<p class="fw-semibold fs-5">✨ What We Offer:</p>
 
 					<ul class="list-group list-group-flush mb-3">
-						<li class="list-group-item border-0 bg-transparent fs-5">📖 In-depth Book Reviews</li>
-						<li class="list-group-item border-0 bg-transparent fs-5">📚 TBR (To Be Read) Lists & Recommendations</li>
-						<li class="list-group-item border-0 bg-transparent fs-5">📝 Reading Challenges & Book Tags</li>
-						<li class="list-group-item border-0 bg-transparent fs-5">🖋️ Author Interviews & Features</li>
-						<li class="list-group-item border-0 bg-transparent fs-5">🔍 Behind-the-Scenes Publishing Insights</li>
+						<li class="list-group-item border-0" style="background-color: rgb(243, 243, 243); font-size: 1.1rem;">📖 In-depth Book Reviews</li>
+						<li class="list-group-item border-0" style="background-color: rgb(243, 243, 243); font-size: 1.1rem;">📚 TBR (To Be Read) Lists & Recommendations</li>
+						<li class="list-group-item border-0" style="background-color: rgb(243, 243, 243); font-size: 1.1rem;">📝 Reading Challenges & Book Tags</li>
+						<li class="list-group-item border-0" style="background-color: rgb(243, 243, 243); font-size: 1.1rem;">🖋️ Author Interviews & Features</li>
+						<li class="list-group-item border-0" style="background-color: rgb(243, 243, 243); font-size: 1.1rem;">🔍 Behind-the-Scenes Publishing Insights</li>
 					</ul>
 
 					<p>Join us on this literary journey and let’s turn the page together — one book at a time. Let’s connect, discuss, and celebrate the written word! 📖</p>
@@ -73,8 +72,9 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
 			</div>
 		</div>
 	</section>
+	<!-- End About Area -->
 
-	<!-- 🟦 Blogs Area -->
+	<!-- Blogs Area -->
 	<section class="blogs-area section-gap py-5" id="blogs" style="font-size: 1.15rem;">
 		<div class="container">
 			<div class="row justify-content-center mb-4">
@@ -95,19 +95,16 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
 				?>
 				<div class="col-lg-6">
 					<div class="single-about media shadow p-4 rounded d-flex align-items-start">
-						<img class="img-fluid rounded" src="<?= $imagePath ?>" alt="Blog Image" width="120" height="120" style="object-fit: cover;">
-						
-						<!-- Add margin-start to this div -->
-						<div class="media-body ms-4" style="margin-left: 2rem;">
-							<h4 class="mt-0 fs-4 mb-2">
-								<a href="blog_details.php?id=<?= $row['id'] ?>" class="text-primary fw-bold">
-									<?= htmlspecialchars($row['title']) ?>
+						<img class="img-fluid rounded me-3" src="<?php echo $imagePath; ?>" alt="Blog Image" width="120" height="120" style="object-fit: cover;">
+						<div class="media-body ps-3">
+							<h4 class="mt-0 fs-4">
+								<a href="blog_details.php?id=<?php echo $row['id']; ?>" class="text-primary fw-bold">
+									<?php echo htmlspecialchars($row['title']); ?>
 								</a>
 							</h4>
-							<p class="mb-0 fs-6"><?= htmlspecialchars($row['short_description']) ?></p>
+							<p class="mb-0 fs-6"><?php echo htmlspecialchars($row['short_description']); ?></p>
 						</div>
 					</div>
-
 				</div>
 				<?php } ?>
 			</div>
@@ -117,8 +114,9 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
 			</div>
 		</div>
 	</section>
+	<!-- End Blogs Area -->
 
-	<!-- 🟦 Contact Area -->
+	<!-- Contact Area -->
 	<section class="contact-area section-gap py-5" id="contact" style="background: url('assets/logo/picture 2.jpg') no-repeat center center / cover; font-size: 1.15rem;">
 		<div class="container">
 			<div class="row justify-content-center mb-4">
@@ -129,7 +127,7 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
 
 			<div class="row align-items-stretch shadow bg-white rounded p-4 fs-5">
 				<div class="col-md-6 mb-4 mb-md-0">
-					<form method="POST" id="contactForm" action="process_contact.php">
+					<form method="POST" id="contactForm" name="contactForm" action="process_contact.php">
 						<div class="mb-3">
 							<label class="form-label text-primary fs-6" for="name">Full Name</label>
 							<input type="text" class="form-control fs-6" name="name" id="name" placeholder="Your Name" required>
@@ -148,6 +146,7 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
 						</div>
 						<div class="text-start">
 							<input type="submit" value="Send Message" class="btn btn-primary px-4 fs-5">
+							<div class="submitting mt-2"></div>
 						</div>
 					</form>
 				</div>
@@ -155,25 +154,29 @@ $status = isset($_GET['status']) ? $_GET['status'] : '';
 				<!-- Google Map -->
 				<div class="col-md-6">
 					<div class="h-100 rounded overflow-hidden">
-						<iframe src="https://www.google.com/maps/embed?pb=!1m18..." width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+						<iframe
+							src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.998574295539!2d90.39090471498098!3d23.793551684571297!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c794f915f59f%3A0xf14f632aef1818c0!2sNational%20Library!5e0!3m2!1sen!2sin!4v1623950297193!5m2!1sen!2sin"
+							width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
+						</iframe>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
+	<!-- End Contact Area -->
 
-	<?php include("include/footer.php"); ?>
+<?php include("include/footer.php"); ?>
 
-	<!-- ✅ Toast Auto Hide Script -->
-	<script>
-		document.addEventListener("DOMContentLoaded", function () {
-			const toast = document.getElementById("custom-toast");
-			if (toast) {
-				setTimeout(() => {
-					toast.style.opacity = "0";
-					setTimeout(() => toast.remove(), 500);
-				}, 5000);
-			}
-		});
-	</script>
-</body>
+<!-- Toast Auto Show -->
+<script>
+	document.addEventListener("DOMContentLoaded", function () {
+		const toast = document.getElementById("custom-toast");
+		if (toast) {
+			setTimeout(() => {
+				toast.style.opacity = "0";
+				setTimeout(() => toast.remove(), 500); // Remove from DOM after fade out
+			}, 5000); // Display for 3 seconds
+		}
+	});
+</script>
+

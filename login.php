@@ -20,10 +20,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($password === $user['password']) {
             $_SESSION['user_id'] = $user['id'];
-            $_SESSION['user_name'] = $user['first_name'].' '.$user['last_name']; 
+            $_SESSION['user_name'] = $user['first_name'] . ' ' . $user['last_name']; 
             $_SESSION['email']     = $user['email_address'];
+            $_SESSION['role_id']   = $user['role_id']; 
 
-            header("Location: admin/dashboad.php");
+            
+            if ($user['role_id'] == 1) {
+              header("Location: admin/dashboad.php");
+           } else {
+                
+             header("Location: admin/dashboad.php");
+            }
             exit;
         } else {
             echo "<script>alert('Incorrect password.'); window.location.href='index.php';</script>";

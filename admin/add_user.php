@@ -1,10 +1,19 @@
 <?php include("include/adminHeader.php"); ?>
 <?php include("config.php"); ?>
+<?php include("check_permission.php"); ?>
 
 <?php
-
 $errors = [];
-$email = $first_name = $last_name = $password = $address = $status = '';
+$email = $first_name = $last_name = $password = $address = $status = $role_id = '';
+
+date_default_timezone_set('Asia/Kolkata');
+
+// ✅ Fetch all active roles for dropdown
+$roles = [];
+$role_result = mysqli_query($conn, "SELECT id, role_name FROM role WHERE status = '1'");
+while ($row = mysqli_fetch_assoc($role_result)) {
+    $roles[] = $row;
+}
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = trim(mysqli_real_escape_string($conn, $_POST['email']));
@@ -13,17 +22,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = trim($_POST['password']);
     $address = trim(mysqli_real_escape_string($conn, $_POST['address']));
     $status = mysqli_real_escape_string($conn, $_POST['status']);
+    $role_id = isset($_POST['role_id']) ? intval($_POST['role_id']) : null;
 
+    // Validation
     if (empty($email)) $errors[] = "Email is required.";
     if (empty($first_name)) $errors[] = "First name is required.";
     if (empty($last_name)) $errors[] = "Last name is required.";
     if (empty($password)) $errors[] = "Password is required.";
     if (empty($address)) $errors[] = "Address is required.";
     if ($status !== "0" && $status !== "1") $errors[] = "Status is required.";
+    if (empty($role_id)) $errors[] = "Role is required.";
 
     if (empty($errors)) {
-        $sql = "INSERT INTO users (email_address, first_name, last_name, password, address, status, created)
-                VALUES ('$email', '$first_name', '$last_name', '$password', '$address', '$status', NOW())";
+        $sql = "INSERT INTO users (email_address, first_name, last_name, password, address, status, role_id, created)
+                VALUES ('$email', '$first_name', '$last_name', '$password', '$address', '$status', '$role_id', NOW())";
 
         if (mysqli_query($conn, $sql)) {
             $_SESSION['toast'] = [
@@ -95,12 +107,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
-                                            <label for="first_name">FIRST NAME</label>
-                                            <input type="text" class="form-control" name="first_name" id="first_name" placeholder="john" value="<?= htmlspecialchars($first_name) ?>">
+                                            <div class="form-group">
+                                                <label for="first_name">FIRST NAME</label>
+                                                <input type="text" class="form-control" name="first_name" id="first_name" placeholder="john" value="<?= htmlspecialchars($first_name) ?>">
+                                            </div>
                                         </div>
                                         <div class="col-sm-4">
-                                            <label for="last_name">LAST NAME</label>
-                                            <input type="text" class="form-control" name="last_name" id="last_name" placeholder="doe" value="<?= htmlspecialchars($last_name) ?>">
+                                            <div class="form-group">
+                                                <label for="last_name">LAST NAME</label>
+                                                <input type="text" class="form-control" name="last_name" id="last_name" placeholder="doe" value="<?= htmlspecialchars($last_name) ?>">
+                                            </div>
                                         </div>
                                     </div>
 
@@ -122,8 +138,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                             </div>
                                         </div>
                                         <div class="col-sm-4">
-                                            <label for="address1">ADDRESS</label>
-                                            <textarea class="form-control" name="address" id="address1" placeholder="1234 Main St"><?= htmlspecialchars($address) ?></textarea>
+                                            <div class="form-group">
+                                                <label for="role_id">ROLE</label>
+                                                <select name="role_id" id="role_id" class="form-control">
+                                                    <option value="">-- Select Role --</option>
+                                                    <?php foreach ($roles as $role): ?>
+                                                        <option value="<?= $role['id']; ?>" <?= ($role_id == $role['id']) ? 'selected' : '' ?>>
+                                                            <?= htmlspecialchars($role['role_name']); ?>
+                                                        </option>
+                                                    <?php endforeach; ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mt-4">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label for="address1">ADDRESS</label>
+                                                <textarea class="form-control" name="address" id="address1" placeholder="1234 Main St"><?= htmlspecialchars($address) ?></textarea>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -134,6 +168,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         </div>
                                     </div>
                                 </form>
+
                             </div>
                         </div>
 
@@ -146,7 +181,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <?php include("include/adminFooter.php"); ?>
 
-<!-- ✅ Toast Auto Hide -->
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const toast = document.getElementById("custom-toast");
@@ -161,5 +195,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         document.body.classList.add('dark-mode');
     }
 </script>
-
 </body>

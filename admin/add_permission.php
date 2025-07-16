@@ -1,5 +1,6 @@
 <?php include("include/adminHeader.php"); ?>
 <?php include("config.php"); ?>
+<?php include("check_permission.php"); ?>
 
 <?php
 $errors = [];

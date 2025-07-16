@@ -1,6 +1,7 @@
 <?php
 include("include/adminHeader.php");
 include("config.php");
+include("check_permission.php");
 
 
 $user_id = $_SESSION['user_id'];
@@ -119,19 +120,19 @@ $email = $user['email_address'];
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
                                 <strong>LinkedIn:</strong>
-                                <a href="https://linkedin.com/in/yourprofile" target="_blank" class="ms-2 text-primary">
+                                <a href="https://www.linkedin.com/in/mehak-tewari-04934b247/" target="_blank" class="ms-2 text-primary">
                                     Visit Profile ➤
                                 </a>
                             </li>
                             <li class="list-group-item">
                                 <strong>Instagram:</strong>
-                                <a href="https://instagram.com/yourprofile" target="_blank" class="ms-2 text-primary">
+                                <a href="https://www.instagram.com/_mehak_._tewari_?igsh=Z2d3YzBmZ2p4dDk5" target="_blank" class="ms-2 text-primary">
                                     Visit Profile ➤
                                 </a>
                             </li>
                             <li class="list-group-item">
-                                <strong>Twitter:</strong>
-                                <a href="https://twitter.com/yourprofile" target="_blank" class="ms-2 text-info">
+                                <strong>Telegram:</strong>
+                                <a href="t.me/mehaktewari" target="_blank" class="ms-2 text-info">
                                     Visit Profile ➤
                                 </a>
                             </li>

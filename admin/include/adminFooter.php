@@ -12,7 +12,7 @@
  <script src="assets/js/link/bootstrap.bundle.min.js"></script> 
 
 <!-- Summernote JS -->
-<script src="assets/js/link/summernote-bs4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote.min.js"></script>
 
 
 </body>

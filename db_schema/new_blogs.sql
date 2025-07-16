@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 15, 2025 at 10:10 AM
+-- Generation Time: Jul 16, 2025 at 08:14 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -48,7 +48,8 @@ INSERT INTO `article` (`id`, `category_id`, `title`, `short_description`, `descr
 (2, '3', 'Twisted Love', 'Twisted Love is a dark, emotionally intense romance about obsession, betrayal, and redemption. It explores how love can both break and heal us.\r\n\r\n', 'Twisted Love is a gripping dark romance that unravels the complexities of a love rooted in pain, secrets, and emotional scars. The story follows a cold, emotionally guarded man and a bright, compassionate woman whose lives become dangerously intertwi', 'download (1).jpeg', '1', '2025-07-01 16:36:02', '0000-00-00 00:00:00'),
 (3, '3', 'Twisted Games', 'Twisted Games is a slow-burn forbidden romance between a fiercely independent princess and her brooding bodyguard. Duty clashes with desire in this emotional rollercoaster.', 'Twisted Games is a sizzling forbidden romance that explores the tension between duty and desire. The story follows Bridget, a modern-day princess bound by royal expectations, and Rhys, her stoic and fiercely protective bodyguard. When Bridget unexpec', 'download (2).jpeg', '1', '2025-07-01 16:37:38', '0000-00-00 00:00:00'),
 (4, '3', 'Twisted Hate', 'Twisted Hate is a fiery enemies-to-lovers romance packed with sizzling chemistry, banter, and unexpected vulnerability. Love and hate collide in this slow-burn battle of hearts.', 'Twisted Hate is an electrifying enemies-to-lovers romance that proves there\'s a fine line between passion and fury. The story centers around Jules Ambrose, a bold, no-nonsense law student, and Josh Chen, a charming doctor with a sharp tongue—and an e', 'download (3).jpeg', '1', '2025-07-01 16:38:49', '0000-00-00 00:00:00'),
-(5, '3', 'Twisted Lies', 'Twisted Lies is a slow-burn fake dating romance between a mysterious billionaire and the woman who challenges everything he thought he knew about love. Lies can be dangerous—especially when hearts are on the line.\r\n\r\n', 'Twisted Lies is a compelling romance featuring a fake relationship that turns unexpectedly real. The story follows Christian Harper, a cold, enigmatic billionaire with a dark past, and Stella Alonso, a sweet, independent influencer trying to build a ', 'download (4).jpeg', '1', '2025-07-01 16:39:47', '0000-00-00 00:00:00');
+(5, '3', 'Twisted Lies', 'Twisted Lies is a slow-burn fake dating romance between a mysterious billionaire and the woman who challenges everything he thought he knew about love. Lies can be dangerous—especially when hearts are on the line.\r\n\r\n', 'Twisted Lies is a compelling romance featuring a fake relationship that turns unexpectedly real. The story follows Christian Harper, a cold, enigmatic billionaire with a dark past, and Stella Alonso, a sweet, independent influencer trying to build a ', 'download (4).jpeg', '1', '2025-07-01 16:39:47', '0000-00-00 00:00:00'),
+(9, '1', 'The King', 'dbhfbdbjhbedhbf cujhdi', '<h3 class=\"\">The King&nbsp;</h3><p><br></p><p><b>gdsvgsvgvetgvdhegbv&nbsp; chjdgyufcgsdgb<u>hvsdghvghvchgvdghsvhev</u></b></p>', 'male.avif', '1', '2025-07-16 11:40:01', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -151,7 +152,25 @@ CREATE TABLE `permissions` (
 --
 
 INSERT INTO `permissions` (`id`, `page_name`, `status`, `created`, `updated`) VALUES
-(2, 'Dashboard', '1', '2025-07-15 13:08:48', '2025-07-15 13:12:39');
+(1, 'add_article.php', '1', '2025-07-15 16:38:49', '2025-07-15 16:38:49'),
+(2, 'add_category.php', '1', '2025-07-15 16:38:49', '2025-07-15 16:38:49'),
+(3, 'add_permission.php', '1', '2025-07-15 16:38:49', '2025-07-15 16:38:49'),
+(4, 'add_role.php', '1', '2025-07-15 16:38:49', '2025-07-15 16:38:49'),
+(5, 'add_user.php', '1', '2025-07-15 16:38:49', '2025-07-15 16:38:49'),
+(6, 'article.php', '1', '2025-07-15 16:38:49', '2025-07-15 16:38:49'),
+(7, 'category.php', '1', '2025-07-15 16:38:49', '2025-07-15 16:38:49'),
+(8, 'contacts.php', '1', '2025-07-15 16:38:49', '2025-07-15 16:38:49'),
+(9, 'dashboad.php', '1', '2025-07-15 16:38:49', '2025-07-15 16:38:49'),
+(10, 'edit_article.php', '1', '2025-07-15 16:38:49', '2025-07-15 16:38:49'),
+(11, 'edit_permission.php', '1', '2025-07-15 16:38:49', '2025-07-15 16:38:49'),
+(12, 'edit_user.php', '1', '2025-07-15 16:38:49', '2025-07-15 16:38:49'),
+(13, 'edit_role.php', '1', '2025-07-15 16:38:49', '2025-07-15 16:38:49'),
+(14, 'edit_category.php', '1', '2025-07-15 16:38:49', '2025-07-15 16:38:49'),
+(15, 'permission.php', '1', '2025-07-15 16:38:49', '2025-07-15 16:38:49'),
+(16, 'profile.php', '1', '2025-07-15 16:38:49', '2025-07-15 16:38:49'),
+(17, 'role.php', '1', '2025-07-15 16:38:49', '2025-07-15 16:38:49'),
+(18, 'setting.php', '1', '2025-07-15 16:38:49', '2025-07-15 16:38:49'),
+(19, 'users.php', '1', '2025-07-15 16:38:49', '2025-07-15 16:38:49');
 
 -- --------------------------------------------------------
 
@@ -172,10 +191,65 @@ CREATE TABLE `role` (
 --
 
 INSERT INTO `role` (`id`, `role_name`, `status`, `created`, `updated`) VALUES
-(1, 'User', '0', '2025-07-15 08:59:54', '2025-07-15 12:41:16'),
-(2, 'Manager', '0', '2025-07-15 09:00:16', '2025-07-15 09:00:16'),
-(3, 'Admin', '0', '2025-07-15 09:00:26', '2025-07-15 09:00:26'),
-(4, 'Admin', '1', '2025-07-15 12:38:17', '0000-00-00 00:00:00');
+(1, 'User', '1', '2025-07-15 08:59:54', '2025-07-15 12:41:16'),
+(2, 'Manager', '1', '2025-07-15 09:00:16', '2025-07-15 09:00:16'),
+(3, 'Admin', '1', '2025-07-15 09:00:26', '2025-07-15 09:00:26');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `role_permission`
+--
+
+CREATE TABLE `role_permission` (
+  `id` int(11) NOT NULL,
+  `role_id` int(11) NOT NULL,
+  `permission_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `role_permission`
+--
+
+INSERT INTO `role_permission` (`id`, `role_id`, `permission_id`) VALUES
+(1, 1, 1),
+(2, 1, 2),
+(3, 1, 6),
+(4, 1, 7),
+(38, 1, 9),
+(5, 1, 10),
+(6, 1, 14),
+(8, 1, 16),
+(7, 1, 18),
+(17, 2, 1),
+(18, 2, 2),
+(14, 2, 6),
+(13, 2, 7),
+(9, 2, 8),
+(12, 2, 9),
+(16, 2, 10),
+(15, 2, 14),
+(11, 2, 16),
+(10, 2, 18),
+(19, 3, 1),
+(20, 3, 2),
+(21, 3, 3),
+(22, 3, 4),
+(23, 3, 5),
+(24, 3, 6),
+(25, 3, 7),
+(26, 3, 8),
+(27, 3, 9),
+(28, 3, 10),
+(29, 3, 11),
+(30, 3, 12),
+(31, 3, 13),
+(32, 3, 14),
+(33, 3, 15),
+(34, 3, 16),
+(35, 3, 17),
+(36, 3, 18),
+(37, 3, 19);
 
 -- --------------------------------------------------------
 
@@ -192,15 +266,18 @@ CREATE TABLE `users` (
   `address` varchar(250) NOT NULL,
   `status` varchar(10) NOT NULL DEFAULT '0',
   `created` datetime NOT NULL,
-  `updated` datetime NOT NULL
+  `updated` datetime NOT NULL,
+  `role_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `email_address`, `first_name`, `last_name`, `password`, `address`, `status`, `created`, `updated`) VALUES
-(1, 'admin@gmail.com', 'Admin', 'Dev', '123456', '123 street', '1', '2025-06-29 19:12:59', '2025-07-02 21:27:28');
+INSERT INTO `users` (`id`, `email_address`, `first_name`, `last_name`, `password`, `address`, `status`, `created`, `updated`, `role_id`) VALUES
+(1, 'admin@gmail.com', 'Admin', 'Dev', '123456', '123 street', '1', '2025-06-29 19:12:59', '2025-07-15 14:57:14', 3),
+(5, 'pihu@gmail.com', 'Pihu', 'Sharma', '123456', '123 delhi park', '1', '2025-07-15 14:57:46', '0000-00-00 00:00:00', 1),
+(6, 'mehu@gmail.com', 'Mehu', 'Tewari', '123456', '123 Delhi', '0', '2025-07-16 07:14:02', '2025-07-16 07:14:02', 2);
 
 --
 -- Indexes for dumped tables
@@ -235,13 +312,22 @@ ALTER TABLE `contacts`
 -- Indexes for table `permissions`
 --
 ALTER TABLE `permissions`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `page_name` (`page_name`);
 
 --
 -- Indexes for table `role`
 --
 ALTER TABLE `role`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `role_permission`
+--
+ALTER TABLE `role_permission`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `unique_role_permission` (`role_id`,`permission_id`),
+  ADD KEY `permission_id` (`permission_id`);
 
 --
 -- Indexes for table `users`
@@ -257,7 +343,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `article`
 --
 ALTER TABLE `article`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -281,7 +367,7 @@ ALTER TABLE `contacts`
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=419;
 
 --
 -- AUTO_INCREMENT for table `role`
@@ -290,10 +376,27 @@ ALTER TABLE `role`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `role_permission`
+--
+ALTER TABLE `role_permission`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `role_permission`
+--
+ALTER TABLE `role_permission`
+  ADD CONSTRAINT `role_permission_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`),
+  ADD CONSTRAINT `role_permission_ibfk_2` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

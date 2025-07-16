@@ -1,5 +1,6 @@
 <?php include("include/adminHeader.php"); ?>
 <?php include("config.php"); ?>
+<?php include("check_permission.php"); ?>
 <?php
 
 $userCountQuery = mysqli_query($conn, "SELECT COUNT(*) AS total FROM users");
@@ -62,60 +63,81 @@ $latestUsersQuery = mysqli_query($conn, "SELECT first_name, last_name, email_add
             <div class="row">
                 <div class="col-md-12">
                     <div class="card flat-card">
+
+                        <!-- Row 1 -->
                         <div class="row-table">
-                            <div class="col-sm-6 card-body br">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <i class="icon feather icon-user text-c-green mb-1 d-block"></i>
-                                    </div>
-                                    <div class="col-sm-8 text-md-center">
-                                        <h5><?php echo $userCount; ?></h5>
-                                        <span><a href="users.php">Users</a></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 card-body">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <i class="icon feather icon-layers text-c-red mb-1 d-block"></i>
-                                    </div>
-                                    <div class="col-sm-8 text-md-center">
-                                        <h5><?php echo $categoryCount; ?></h5>
-                                        <span><a href="category.php">Categories</a></span>
+                            <?php if (in_array($_SESSION['role_id'], [1, 2, 3])): ?>
+                                <!-- Category -->
+                                <div class="col-sm-6 card-body br">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <i class="icon feather icon-layers text-c-red mb-1 d-block"></i>
+                                        </div>
+                                        <div class="col-sm-8 text-md-center">
+                                            <h5><?= $categoryCount ?></h5>
+                                            <span><a href="category.php">Categories</a></span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            <?php endif; ?>
+
+                            <?php if (in_array($_SESSION['role_id'], [1, 2, 3])): ?>
+                                <!-- Articles -->
+                                <div class="col-sm-6 card-body">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <i class="icon feather icon-file-text text-c-blue mb-1 d-block"></i>
+                                        </div>
+                                        <div class="col-sm-8 text-md-center">
+                                            <h5><?= $articleCount ?></h5>
+                                            <span><a href="articles.php">Articles</a></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
                         </div>
+
+                        <!-- Row 2 -->
                         <div class="row-table">
-                            <div class="col-sm-6 card-body br">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <i class="icon feather icon-file-text text-c-blue mb-1 d-block"></i>
-                                    </div>
-                                    <div class="col-sm-8 text-md-center">
-                                        <h5><?php echo $articleCount; ?></h5>
-                                        <span><a href="articles.php">Articles</a></span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 card-body">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <i class="icon feather icon-mail text-c-yellow mb-1 d-block"></i>
-                                    </div>
-                                    <div class="col-sm-8 text-md-center">
-                                        <h5><?php echo $contactCount; ?></h5>
-                                        <span><a href="contacts.php">Contacts</a></span>
+                            <?php if (in_array($_SESSION['role_id'], [2, 3])): ?>
+                                <!-- Contacts -->
+                                <div class="col-sm-6 card-body br">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <i class="icon feather icon-mail text-c-yellow mb-1 d-block"></i>
+                                        </div>
+                                        <div class="col-sm-8 text-md-center">
+                                            <h5><?= $contactCount ?></h5>
+                                            <span><a href="contacts.php">Contacts</a></span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            <?php endif; ?>
+
+                            <?php if ($_SESSION['role_id'] == 3): ?>
+                                <!-- Users -->
+                                <div class="col-sm-6 card-body">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <i class="icon feather icon-user text-c-green mb-1 d-block"></i>
+                                        </div>
+                                        <div class="col-sm-8 text-md-center">
+                                            <h5><?= $userCount ?></h5>
+                                            <span><a href="users.php">Users</a></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
                         </div>
+
                     </div>
                 </div>
             </div>
 
+
+
             <!-- Articles Table -->
-            <div class = "row" >
+            <div class="row">
                 <div class="col-md-12">
                     <div class="card table-card">
                         <div class="card-header d-flex justify-content-between">
@@ -129,7 +151,7 @@ $latestUsersQuery = mysqli_query($conn, "SELECT first_name, last_name, email_add
                                         <tr>
                                             <th>S.No</th>
                                             <th>Title</th>
-                                            <th>Category ID</th>
+                                            <th>Category</th>
                                             <th>Created</th>
                                             <th>Status</th>
                                         </tr>
@@ -139,21 +161,20 @@ $latestUsersQuery = mysqli_query($conn, "SELECT first_name, last_name, email_add
                                         <?php while ($article = mysqli_fetch_assoc($latestArticlesQuery)) : ?>
                                             <tr>
                                                 <td><?= ++$index; ?></td>
-                                                <td><?php echo htmlspecialchars($article['title']); ?></td>
+                                                <td><?= htmlspecialchars($article['title']); ?></td>
                                                 <td>
                                                     <?php
-                                                    $catId = $article["category_id"];                                                             
-                                                    $res = mysqli_query($conn,"SELECT * FROM category where id = $catId");
-                                                    $data = mysqli_fetch_assoc($res);   
-                                                    echo $catName = $data['category_name'];
+                                                    $catId = $article["category_id"];
+                                                    $res = mysqli_query($conn, "SELECT category_name FROM category WHERE id = $catId");
+                                                    $data = mysqli_fetch_assoc($res);
+                                                    echo htmlspecialchars($data['category_name'] ?? 'N/A');
                                                     ?>
                                                 </td>
-                                                <td><?php echo date('d-m-Y h:i A', strtotime($article['created'])); ?></td>
-                                                <td><?= ($article['status'] == '1') ? "Active" : "Inactive"; ?></td>
+                                                <td><?= date('d-m-Y h:i A', strtotime($article['created'])); ?></td>
+                                                <td><?= $article['status'] == '1' ? 'Active' : 'Inactive'; ?></td>
                                             </tr>
                                         <?php endwhile; ?>
                                     </tbody>
-
                                 </table>
                             </div>
                         </div>
@@ -161,8 +182,10 @@ $latestUsersQuery = mysqli_query($conn, "SELECT first_name, last_name, email_add
                 </div>
             </div>
 
+
             <!-- Users Preview -->
-             <div class = "row" >
+            <?php if ($_SESSION['role_id'] == 3): ?>
+            <div class="row">
                 <div class="col-md-12">
                     <div class="card table-card">
                         <div class="card-header d-flex justify-content-between">
@@ -174,9 +197,9 @@ $latestUsersQuery = mysqli_query($conn, "SELECT first_name, last_name, email_add
                                 <table class="table table-hover mb-0">
                                     <thead class="thead-dark">
                                         <tr>
-                                            <th>S>NO</th>
+                                            <th>S.NO</th>
                                             <th>NAME</th>
-                                            <th>EMAIL ADDRESS</th>
+                                            <th>EMAIL</th>
                                             <th>CREATED</th>
                                         </tr>
                                     </thead>
@@ -191,13 +214,14 @@ $latestUsersQuery = mysqli_query($conn, "SELECT first_name, last_name, email_add
                                             </tr>
                                         <?php endwhile; ?>
                                     </tbody>
-
                                 </table>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <?php endif; ?>
+
         </div>
     </div>
     <?php include("include/adminFooter.php"); ?>

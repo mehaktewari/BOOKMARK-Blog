@@ -1,5 +1,7 @@
 <?php include("include/adminHeader.php"); ?>
 <?php include("config.php"); ?>
+<?php include("check_permission.php"); ?>
+
 <?php
 date_default_timezone_set('Asia/Kolkata');
 
@@ -7,11 +9,19 @@ $action = $_GET['action'] ?? '';
 $id = intval($_GET['id'] ?? 0);
 $errors = [];
 
-$email_address = $first_name = $last_name = $password = $address = $status = '';
+$email_address = $first_name = $last_name = $password = $address = $status = $role_id = '';
 
+// Fetch user data
 $query = "SELECT * FROM users WHERE id = $id";
 $result = mysqli_query($conn, $query);
 $data = mysqli_fetch_assoc($result);
+
+// Fetch all active roles
+$roles = [];
+$role_result = mysqli_query($conn, "SELECT id, role_name FROM role WHERE status = '1'");
+while ($row = mysqli_fetch_assoc($role_result)) {
+    $roles[] = $row;
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email_address = mysqli_real_escape_string($conn, trim($_POST['email_address'] ?? ''));
@@ -20,8 +30,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = mysqli_real_escape_string($conn, trim($_POST['password'] ?? ''));
     $address = mysqli_real_escape_string($conn, trim($_POST['address'] ?? ''));
     $status = mysqli_real_escape_string($conn, trim($_POST['status'] ?? ''));
+    $role_id = isset($_POST['role_id']) ? intval($_POST['role_id']) : null;
 
-    if (empty($email_address) || empty($first_name) || empty($last_name) || empty($password) || $status === '') {
+    if (empty($email_address) || empty($first_name) || empty($last_name) || empty($password) || $status === '' || empty($role_id)) {
         $_SESSION['toast'] = [
             'type' => 'error',
             'message' => '❌ Please fill all required fields.'
@@ -35,6 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 password = '$password', 
                 address = '$address', 
                 status = '$status', 
+                role_id = '$role_id', 
                 updated = NOW() 
                 WHERE id = $id";
 
@@ -59,7 +71,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
 <?php include("include/navBar.php"); ?>
 
-<!-- ✅ Toast Message -->
 <?php if (isset($_SESSION['toast'])): ?>
     <?php $toast = $_SESSION['toast']; unset($_SESSION['toast']); ?>
     <div id="custom-toast" style="position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
@@ -101,18 +112,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <label>LAST NAME</label>
                                     <input type="text" name="last_name" class="form-control" value="<?= htmlspecialchars($data["last_name"] ?? ''); ?>" required>
                                 </div>
-                                <div class="col-sm-6 mt-3">
-                                    <label>ADDRESS</label>
-                                    <input type="text" name="address" class="form-control" value="<?= htmlspecialchars($data["address"] ?? ''); ?>">
-                                </div>
+                                
                                 <div class="col-sm-6 mt-3">
                                     <label for="status">STATUS</label>
-                                    <select name="status" class="form-control" id="status" required>
+                                    <select name="status" class="form-control" required>
                                         <option value="">-- Select Status --</option>
                                         <option value="1" <?= ($data["status"] == '1') ? 'selected' : ''; ?>>Active</option>
                                         <option value="0" <?= ($data["status"] == '0') ? 'selected' : ''; ?>>Inactive</option>
                                     </select>
                                 </div>
+                                <div class="col-sm-6 mt-3">
+                                    <label for="role_id">ROLE</label>
+                                    <select name="role_id" class="form-control" required>
+                                        <option value="">-- Select Role --</option>
+                                        <?php foreach ($roles as $role): ?>
+                                            <option value="<?= $role['id']; ?>" <?= ($data['role_id'] == $role['id']) ? 'selected' : ''; ?>>
+                                                <?= htmlspecialchars($role['role_name']); ?>
+                                            </option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                                <div class="col-sm-12 mt-3">
+                                    <label>ADDRESS</label>
+                                    <textarea name="address" class="form-control" rows="3"><?= htmlspecialchars($data["address"] ?? ''); ?></textarea>
+                                </div>
+
                             </div>
 
                             <div class="row mt-4">
@@ -132,7 +156,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <?php include("include/adminFooter.php"); ?>
 
-<!-- ✅ Toast Auto Hide -->
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const toast = document.getElementById("custom-toast");
