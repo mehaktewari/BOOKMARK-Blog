@@ -27,26 +27,25 @@ This project is a simple yet powerful **blogging platform** designed using **cor
 
 ## 🖼️ Screenshots
 
-> Below are previews of different pages from the blogging platform. All screenshots are stored in `public/screenshots/`.
-
+> Below are previews of different pages from the blogging platform. 
 | Page              | Preview |
 |-------------------|---------|
-| **Home Page**     | ![](public/screenshots/home.png) |
-| **All Blogs**     | ![](public/screenshots/allblog.png) |
-| **Single Blog**   | ![](public/screenshots/blog.png) |
-| **Add Article**   | ![](public/screenshots/article.png) |
-| **About Page**    | ![](public/screenshots/about.png) |
-| **Login Page**    | ![](public/screenshots/login.png) |
-| **Contact Page**  | ![](public/screenshots/contact.png) |
-| **Contact Table** | ![](public/screenshots/contacts.png) |
-| **Comment Table** | ![](public/screenshots/comment.png) |
-| **Admin Dashboard** | ![](public/screenshots/dashboard.png) |
-| **Category Page** | ![](public/screenshots/category.png) |
-| **User Roles**    | ![](public/screenshots/role.png) |
-| **Permissions**   | ![](public/screenshots/permission.png) |
-| **Users Page**    | ![](public/screenshots/users.png) |
-| **Profile Page**  | ![](public/screenshots/profile.png) |
-| **Settings Page** | ![](public/screenshots/setting.png) |
+| **Home Page**     | ![](admin/public/screenshots/home.png) |
+| **All Blogs**     | ![](admin/public/screenshots/allblog.png) |
+| **Single Blog**   | ![](admin/public/screenshots/blog.png) |
+| **Add Article**   | ![](admin/public/screenshots/article.png) |
+| **About Page**    | ![](admin/public/screenshots/about.png) |
+| **Login Page**    | ![](admin/public/screenshots/login.png) |
+| **Contact Page**  | ![](admin/public/screenshots/contact.png) |
+| **Contact Table** | ![](admin/public/screenshots/contacts.png) |
+| **Comment Table** | ![](admin/public/screenshots/comment.png) |
+| **Admin Dashboard** | ![](admin/public/screenshots/dashboard.png) |
+| **Category Page** | ![](admin/public/screenshots/category.png) |
+| **User Roles**    | ![](admin/public/screenshots/role.png) |
+| **Permissions**   | ![](admin/public/screenshots/permission.png) |
+| **Users Page**    | ![](admin/public/screenshots/users.png) |
+| **Profile Page**  | ![](admin/public/screenshots/profile.png) |
+| **Settings Page** | ![](admin/public/screenshots/setting.png) |
 ---
 
 ## 🛠️ Tech Stack
