@@ -47,7 +47,6 @@ This project is a simple yet powerful **blogging platform** designed using **cor
 | **Users Page**    | ![](public/screenshots/users.png) |
 | **Profile Page**  | ![](public/screenshots/profile.png) |
 | **Settings Page** | ![](public/screenshots/setting.png) |
-
 ---
 
 ## 🛠️ Tech Stack
