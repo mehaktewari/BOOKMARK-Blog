@@ -39,7 +39,7 @@ This project is a simple yet powerful **blogging platform** designed using **cor
  - Contact Page   ![](admin/public/screenshots/contact.png)
  - Contact Table  ![](admin/public/screenshots/contacts.png)
  - Comment Table  ![](admin/public/screenshots/comment.png)
- - Admin Dashboard ![](admin/public/screenshots/dashboard.png)
+ - Admin Dashboard ![](admin/public/screenshots/dashboad.png)
  - Category Page  ![](admin/public/screenshots/category.png)
  - User Roles     ![](admin/public/screenshots/role.png)
  - Permissions    ![](admin/public/screenshots/permission.png)
