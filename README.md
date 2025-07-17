@@ -1,5 +1,5 @@
 
-<h1 align="center">📝 Blogging Page</h1>
+<h1 align="center">📝 BOOKMARK Blogging Page</h1>
 <p align="center">A responsive and dynamic blog management system built with <b>PHP, MySQL, HTML, CSS, JS</b> – hosted on <b>XAMPP</b></p>
 
 
